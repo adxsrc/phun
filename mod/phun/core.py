@@ -14,6 +14,7 @@
 
 
 from functools import wraps
+from astropy   import units
 
 from .helper import *
 
@@ -62,12 +63,22 @@ def phun(mkf):
 
     @wraps(mkf)
     def mkph(*args, **kwargs):
+
+        uargs = []
+        vargs = {}
+        for i, v in enumerate(args):
+            if isinstance(v, units.UnitBase):
+                uargs.append(v)
+            else:
+                uargs.append(v.unit)
+                vargs[i] = v.value
+
         u = get_default(kwargs, 'u_res',   mkf)
         b = get_default(kwargs, 'backend', mkf)
 
         kwargs['backend'] = get_backend(b)
 
-        ph = mkf(*args, **kwargs)
+        ph = partial(mkf(*uargs, **kwargs), vargs)
         ph.unit = u
         return ph
 
