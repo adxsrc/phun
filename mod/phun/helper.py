@@ -16,6 +16,24 @@
 """Extra helper functions"""
 
 
+from inspect import signature
+
+
+def get_argnames(f):
+    """Get Argument Names from Function Signature
+
+    Using the `inspect` module, it is possible to obtain the names of
+    position arguments `a1`, `a2`, ..., from a function
+
+        def f(a1, a2, ...):
+            ...
+
+    This helper function return these names in a tuple.
+
+    """
+    return tuple(k for k, v in signature(f).parameters.items() if v.default is v.empty)
+
+
 def get_keyword(name, f, kwargs):
     """Deduce Default Keywarded Argument
 
@@ -23,7 +41,6 @@ def get_keyword(name, f, kwargs):
     value is not set in `kwargs`.
 
     """
-    from inspect import signature
     return kwargs.get(name, signature(f).parameters[name].default)
 
 
