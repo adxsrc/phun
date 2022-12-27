@@ -16,6 +16,17 @@
 """Extra helper functions"""
 
 
+def get_keyword(name, f, kwargs):
+    """Deduce Default Keywarded Argument
+
+    Return the default keyworded argument of function `f()` if that
+    value is not set in `kwargs`.
+
+    """
+    from inspect import signature
+    return kwargs.get(name, signature(f).parameters[name].default)
+
+
 def get_backend(backend):
     """Deduce Backend from Loaded Module"""
 

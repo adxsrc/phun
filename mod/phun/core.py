@@ -13,9 +13,7 @@
 # limitations under the License.
 
 
-from inspect import signature
-
-from .helper import get_backend
+from .helper import *
 
 
 def phun(mkf):
@@ -27,14 +25,12 @@ def phun(mkf):
 
     """
 
-    p = signature(mkf).parameters
-
     def mkph(*args, **kwargs):
-        b = kwargs.get('backend', p['backend'].default)
+        b = get_keyword('backend', mkf, kwargs)
         kwargs['backend'] = get_backend(b)
 
         ph = mkf(*args, **kwargs)
-        ph.unit = kwargs.get('u_res', p['u_res'].default)
+        ph.unit = get_keyword('u_res', mkf, kwargs)
         return ph
 
     return mkph
