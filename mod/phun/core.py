@@ -29,8 +29,8 @@ def phun(mkf):
 
     @wraps(mkf)
     def mkph(*args, **kwargs):
-        u = get_keyword('u_res',   mkf, kwargs)
-        b = get_keyword('backend', mkf, kwargs)
+        u = get_default(kwargs, 'u_res',   mkf)
+        b = get_default(kwargs, 'backend', mkf)
 
         kwargs['backend'] = get_backend(b)
 

@@ -34,8 +34,8 @@ def get_argnames(f):
     return tuple(k for k, v in signature(f).parameters.items() if v.default is v.empty)
 
 
-def get_keyword(name, f, kwargs):
-    """Deduce Default Keywarded Argument
+def get_default(kwargs, name, f):
+    """Get Keyworded Argument
 
     Return the default keyworded argument of function `f()` if that
     value is not set in `kwargs`.
