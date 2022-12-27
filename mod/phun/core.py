@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+from functools import wraps
+
 from .helper import *
 
 
@@ -25,6 +27,7 @@ def phun(mkf):
 
     """
 
+    @wraps(mkf)
     def mkph(*args, **kwargs):
         u = get_keyword('u_res',   mkf, kwargs)
         b = get_keyword('backend', mkf, kwargs)
