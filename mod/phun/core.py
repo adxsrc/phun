@@ -13,10 +13,23 @@
 # limitations under the License.
 
 
-"""Physics aware functions"""
+from inspect import signature
 
 
-__version__ = "0.0.0"
+def phun(mkf):
+    """Physics Aware Function Generator Transformer
 
+    ``phun`` is a decorator that transforms a restricted physics aware
+    function generator ``mkf()`` into a more flexible function
+    generator ``mkph()``.
 
-from .core import phun
+    """
+
+    p = signature(mkf).parameters
+
+    def mkph(*args, **kwargs):
+        ph = mkf(*args, **kwargs)
+        ph.unit = kwargs.get('u_res', p['u_res'].default)
+        return ph
+
+    return mkph
