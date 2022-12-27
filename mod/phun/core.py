@@ -18,6 +18,39 @@ from functools import wraps
 from .helper import *
 
 
+def partial(f, params):
+    """An Improved Version of `functools.partial()`"""
+
+    fargs = get_argnames(f)
+    fkeys = get_keywords(f)
+
+    pargs   = {}
+    pkwargs = {}
+    for k, v in params.items():
+        if isinstance(k, int):
+            pargs[k] = v
+        elif isinstance(k, str):
+            pkwargs[k] = v
+        else:
+            raise ValueError(
+                f'Do not know how to interpret key {k} for `args` or `kwargs`')
+
+    assert len(pargs)   <= len(fargs)
+    assert set(pkwargs) <= set(fkeys)
+
+    n = len(fargs)
+
+    @wraps(f)
+    def p(*args, **kwargs): # closure on `pargs`, `pkwargs`, and `n`
+        assert len(args) + len(pargs) == n
+        args = list(args)
+        args = tuple(params[i] if i in params else args.pop(0) for i in range(n))
+        kwargs = {**pkwargs, **kwargs}
+        return f(*args, **kwargs)
+
+    return p
+
+
 def phun(mkf):
     """Physics Aware Function Generator Transformer
 
