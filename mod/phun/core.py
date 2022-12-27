@@ -18,7 +18,7 @@ from functools import wraps
 from .helper import *
 
 
-def partial(f, params):
+def partial(f, params={}):
     """An Improved Version of `functools.partial()`"""
 
     fargs = get_argnames(f)

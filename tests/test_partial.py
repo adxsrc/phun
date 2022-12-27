@@ -24,7 +24,7 @@ def f(a, b, c=3, d=4):
 
 
 def test_partial0():
-    g = partial(f, {})
+    g = partial(f)
     assert g(1,2) == (1,2,3,4)
 
 def test_partial1():
@@ -41,7 +41,7 @@ def test_partial3():
 
 
 def test_partial4():
-    g1 = partial(f, {})
+    g1 = partial(f)
     assert g1(1,2) == (1,2,3,4)
 
 def test_partial5():
