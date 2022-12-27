@@ -19,4 +19,4 @@
 __version__ = "0.0.0"
 
 
-from .core import partial, phun
+from .core import partial, optdec, phun
