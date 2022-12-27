@@ -26,11 +26,13 @@ def phun(mkf):
     """
 
     def mkph(*args, **kwargs):
+        u = get_keyword('u_res',   mkf, kwargs)
         b = get_keyword('backend', mkf, kwargs)
+
         kwargs['backend'] = get_backend(b)
 
         ph = mkf(*args, **kwargs)
-        ph.unit = get_keyword('u_res', mkf, kwargs)
+        ph.unit = u
         return ph
 
     return mkph
