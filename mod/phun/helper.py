@@ -34,6 +34,21 @@ def get_argnames(f):
     return tuple(k for k, v in signature(f).parameters.items() if v.default is v.empty)
 
 
+def get_keywords(f):
+    """Get Keywords from Function Signature
+
+    Using the `inspect` module, it is possible to obtain the names of
+    keyworded arguments `k1`, `k2`, ..., from a function
+
+        def f(..., k1=..., k2=..., ...):
+            ...
+
+    This helper function return these names in a tuple.
+
+    """
+    return tuple(k for k, v in signature(f).parameters.items() if v.default is not v.empty)
+
+
 def get_default(kwargs, name, f):
     """Get Keyworded Argument
 
