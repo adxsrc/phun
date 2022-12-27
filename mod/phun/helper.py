@@ -60,14 +60,15 @@ def get_default(kwargs, name, f):
     return kwargs.get(name, signature(f).parameters[name].default)
 
 
-def get_unit(unit, choices):
+def get_unit(unit, default):
     """Select Unit"""
 
-    if not isinstance(unit, units.UnitBase):
-        if isinstance(choices, dict):
-            return choices[unit]
-        else:
-            return choices
+    if isinstance(unit, units.UnitBase):
+        return unit
+    elif isinstance(default, units.UnitBase):
+        return default
+    else:
+        return default[unit]
 
 
 def get_backend(backend):
