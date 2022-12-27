@@ -15,6 +15,8 @@
 
 from inspect import signature
 
+from .helper import get_backend
+
 
 def phun(mkf):
     """Physics Aware Function Generator Transformer
@@ -28,6 +30,9 @@ def phun(mkf):
     p = signature(mkf).parameters
 
     def mkph(*args, **kwargs):
+        b = kwargs.get('backend', p['backend'].default)
+        kwargs['backend'] = get_backend(b)
+
         ph = mkf(*args, **kwargs)
         ph.unit = kwargs.get('u_res', p['u_res'].default)
         return ph
