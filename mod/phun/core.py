@@ -52,7 +52,7 @@ def partial(f, params={}):
     return p
 
 
-def phun(mkf):
+def phun(arg):
     """Physics Aware Function Generator Transformer
 
     ``phun`` is a decorator that transforms a restricted physics aware
@@ -60,26 +60,33 @@ def phun(mkf):
     generator ``mkph()``.
 
     """
+    def inner(mkf, u_res=None):
 
-    @wraps(mkf)
-    def mkph(*args, **kwargs):
+        @wraps(mkf)
+        def mkph(*args, **kwargs):
 
-        uargs = []
-        vargs = {}
-        for i, v in enumerate(args):
-            if isinstance(v, units.UnitBase):
-                uargs.append(v)
-            else:
-                uargs.append(v.unit)
-                vargs[i] = v.value
+            uargs = []
+            vargs = {}
+            for i, v in enumerate(args):
+                if isinstance(v, units.UnitBase):
+                    uargs.append(v)
+                else:
+                    uargs.append(v.unit)
+                    vargs[i] = v.value
 
-        u = get_default(kwargs, 'u_res',   mkf)
-        b = get_default(kwargs, 'backend', mkf)
+            u = get_default(kwargs, 'u_res', mkf)
+            b = get_default(kwargs, 'backend', mkf)
 
-        kwargs['backend'] = get_backend(b)
+            kwargs['u_res']   = get_unit(u, u_res)
+            kwargs['backend'] = get_backend(b)
 
-        ph = partial(mkf(*uargs, **kwargs), vargs)
-        ph.unit = u
-        return ph
+            ph = partial(mkf(*uargs, **kwargs), vargs)
+            ph.unit = kwargs['u_res']
+            return ph
 
-    return mkph
+        return mkph
+
+    if callable(arg):
+        return inner(arg, u_res=None)
+    else:
+        return lambda mkf: inner(mkf, u_res=arg)
