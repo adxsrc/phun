@@ -81,7 +81,9 @@ def phun(mkf, u_res=None):
         uargs = []
         vargs = {}
         for i, v in enumerate(args):
-            if isinstance(v, units.UnitBase):
+            if v == 1:
+                uargs.append(units.dimensionless_unscaled)
+            elif isinstance(v, units.UnitBase):
                 uargs.append(v)
             else:
                 uargs.append(v.unit)
