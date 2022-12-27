@@ -17,6 +17,7 @@
 
 
 from inspect import signature
+from astropy import units
 
 
 def get_argnames(f):
@@ -57,6 +58,16 @@ def get_default(kwargs, name, f):
 
     """
     return kwargs.get(name, signature(f).parameters[name].default)
+
+
+def get_unit(unit, choices):
+    """Select Unit"""
+
+    if not isinstance(unit, units.UnitBase):
+        if isinstance(choices, dict):
+            return choices[unit]
+        else:
+            return choices
 
 
 def get_backend(backend):
