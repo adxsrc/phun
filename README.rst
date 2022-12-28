@@ -1,7 +1,7 @@
 |Phun|_: Physics aware functions
 ================================
 
-|Phun|_ helps writing physics aware functions easier.
+|Phun|_ makes writing physics aware functions easier.
 
 
 .. |Phun| replace:: ``Phun``
