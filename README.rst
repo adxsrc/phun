@@ -1,3 +1,9 @@
+|PyPI|
+
+.. |PyPI| image:: https://github.com/adxsrc/phun/actions/workflows/python-publish.yml/badge.svg
+   :target: https://pypi.org/project/phun/
+
+
 |Phun|_: Physics Aware Functions
 ================================
 
