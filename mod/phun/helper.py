@@ -67,11 +67,11 @@ def get_unit(unit, default):
 
     """
     if isinstance(unit, units.UnitBase):
-        return 1.0 * unit
+        return unit
     elif isinstance(default, units.UnitBase):
-        return 1.0 * default
+        return default
     else:
-        return 1.0 * default[unit]
+        return default[unit]
 
 
 def get_backend(backend):
