@@ -61,14 +61,17 @@ def get_default(kwargs, name, f):
 
 
 def get_unit(unit, default):
-    """Select Unit"""
+    """Select Unit
 
+    Select the right unit and return as Quantities.
+
+    """
     if isinstance(unit, units.UnitBase):
-        return unit
+        return 1.0 * unit
     elif isinstance(default, units.UnitBase):
-        return default
+        return 1.0 * default
     else:
-        return default[unit]
+        return 1.0 * default[unit]
 
 
 def get_backend(backend):
