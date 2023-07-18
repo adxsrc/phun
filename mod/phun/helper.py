@@ -73,12 +73,15 @@ def get_unit(unit, default):
     Select the right unit and return as Quantities.
 
     """
-    if isinstance(unit, units.UnitBase):
-        return unit
-    elif isinstance(default, units.UnitBase):
+    if unit is None and istreeof(default, units.UnitBase):
         return default
-    else:
+    elif istreeof(unit, units.UnitBase):
+        return unit
+    elif isinstance(default, dict) and unit in default:
         return default[unit]
+    else:
+        raise ValueError(
+            f"Do not know what to do with type(unit) = {type(unit)} and type(default) = {type(default)}")
 
 
 def get_backend(backend):
