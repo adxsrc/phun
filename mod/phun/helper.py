@@ -20,6 +20,13 @@ from inspect import signature
 from astropy import units
 
 
+def istreeof(t, c):
+    if isinstance(t, tuple):
+        return all(istreeof(n, c) for n in t)
+    else:
+        return isinstance(t, c)
+
+
 def get_argnames(f):
     """Get Argument Names from Function Signature
 
