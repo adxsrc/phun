@@ -16,7 +16,7 @@
 """Physics aware functions decorators and helpers."""
 
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 from .core import partial, optdec, phun
