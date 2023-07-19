@@ -13,6 +13,9 @@
 # limitations under the License.
 
 
+"""Implementation of physics aware functions decorators and helpers."""
+
+
 from functools import wraps
 from astropy   import units
 
@@ -20,7 +23,7 @@ from .helper import *
 
 
 def partial(f, params={}):
-    """An Improved Version of `functools.partial()`"""
+    """An improved version of `functools.partial()`."""
 
     fargs = get_argnames(f)
     fkeys = get_keywords(f)
@@ -34,7 +37,7 @@ def partial(f, params={}):
             pkwargs[k] = v
         else:
             raise ValueError(
-                f'Do not know how to interpret key {k} for `args` or `kwargs`')
+                f"Do not know how to interpret key {k} for `args` or `kwargs`")
 
     assert len(pargs)   <= len(fargs)
     assert set(pkwargs) <= set(fkeys)
@@ -53,7 +56,7 @@ def partial(f, params={}):
 
 
 def optdec(dec):
-    """Make Decorator Support Optional Arguments and Keywords"""
+    """Make decorator support optional arguments and keywords."""
 
     @wraps(dec)
     def wrap(*args, **kwargs):
@@ -67,7 +70,7 @@ def optdec(dec):
 
 @optdec
 def phun(mkf, u_res=None):
-    """Physics Aware Function Generator Transformer
+    """Physics aware function generator transformer.
 
     ``phun`` is a decorator that transforms a restricted physics aware
     function generator ``mkf()`` into a more flexible function

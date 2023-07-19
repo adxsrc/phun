@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-"""Extra helper functions"""
+"""Extra helper functions for ``phun``."""
 
 
 from inspect import signature
@@ -21,6 +21,8 @@ from astropy import units
 
 
 def istreeof(t, c):
+    """Test if ``t`` is a tree of only class ``c``."""
+
     if isinstance(t, tuple):
         return all(istreeof(n, c) for n in t)
     else:
@@ -28,10 +30,10 @@ def istreeof(t, c):
 
 
 def get_argnames(f):
-    """Get Argument Names from Function Signature
+    """Get argument names from function signature.
 
-    Using the `inspect` module, it is possible to obtain the names of
-    position arguments `a1`, `a2`, ..., from a function
+    Using the ``inspect`` module, it is possible to obtain the names
+    of position arguments ``a1``, ``a2``, ..., from a function
 
         def f(a1, a2, ...):
             ...
@@ -43,10 +45,10 @@ def get_argnames(f):
 
 
 def get_keywords(f):
-    """Get Keywords from Function Signature
+    """Get keywords from function signature.
 
-    Using the `inspect` module, it is possible to obtain the names of
-    keyworded arguments `k1`, `k2`, ..., from a function
+    Using the ``inspect`` module, it is possible to obtain the names
+    of keyworded arguments ``k1``, ``k2``, ..., from a function
 
         def f(..., k1=..., k2=..., ...):
             ...
@@ -58,21 +60,18 @@ def get_keywords(f):
 
 
 def get_default(kwargs, name, f):
-    """Get Keyworded Argument
+    """Get keyworded argument.
 
-    Return the default keyworded argument of function `f()` if that
-    value is not set in `kwargs`.
+    Return the default keyworded argument of function ``f()`` if that
+    value is not set in ``kwargs``.
 
     """
     return kwargs.get(name, signature(f).parameters[name].default)
 
 
 def get_unit(unit, default):
-    """Select Unit
+    """Select the right unit."""
 
-    Select the right unit and return as Quantities.
-
-    """
     if unit is None and istreeof(default, units.UnitBase):
         return default
     elif istreeof(unit, units.UnitBase):
@@ -85,7 +84,7 @@ def get_unit(unit, default):
 
 
 def get_backend(backend):
-    """Deduce Backend from Loaded Module"""
+    """Deduce backend from loaded module(s)."""
 
     if backend is None:
         import sys

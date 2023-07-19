@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-"""Physics aware functions"""
+"""Physics aware functions decorators and helpers."""
 
 
 __version__ = "0.1.0"
