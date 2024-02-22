@@ -1,4 +1,7 @@
-|PyPI|
+|Lint and Test| |PyPI|
+
+.. |Lint and Test| image:: https://github.com/adxsrc/phun/actions/workflows/python-package.yml/badge.svg
+   :target: https://github.com/adxsrc/phun/actions/workflows/python-package.yml
 
 .. |PyPI| image:: https://github.com/adxsrc/phun/actions/workflows/python-publish.yml/badge.svg
    :target: https://pypi.org/project/phun/
