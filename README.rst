@@ -1,7 +1,10 @@
-|Lint and Test| |PyPI|
+|LT| |Docs| |PyPI|
 
-.. |Lint and Test| image:: https://github.com/adxsrc/phun/actions/workflows/python-package.yml/badge.svg
+.. |LT| image:: https://github.com/adxsrc/phun/actions/workflows/python-package.yml/badge.svg
    :target: https://github.com/adxsrc/phun/actions/workflows/python-package.yml
+
+.. |Docs| image:: https://github.com/adxsrc/phun/actions/workflows/sphinx-pages.yml/badge.svg
+   :target: https://github.com/adxsrc/phun/actions/workflows/sphinx-pages.yml
 
 .. |PyPI| image:: https://github.com/adxsrc/phun/actions/workflows/python-publish.yml/badge.svg
    :target: https://pypi.org/project/phun/
